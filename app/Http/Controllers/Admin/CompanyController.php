@@ -37,8 +37,8 @@ class CompanyController extends Controller
     {
         $company = Company::create($request->all());
 
-        if ($request->hasFile('logo')) {
-            $company->addMediaFromRequest('logo')->toMediaCollection('logo');
+        if ($request->input('logo', false)) {
+            $company->addMedia(storage_path('tmp/uploads/'.basename($request->input('logo'))))->toMediaCollection('logo');
         }
 
         if ($media = $request->input('ck-media', false)) {
@@ -59,12 +59,12 @@ class CompanyController extends Controller
     {
         $company->update($request->all());
 
-        if ($request->hasFile('logo')) {
-            if (!$company->logo || $request->input('logo') !== $company->logo->file_name) {
+        if ($request->input('logo', false)) {
+            if (! $company->logo || $request->input('logo') !== $company->logo->file_name) {
                 if ($company->logo) {
                     $company->logo->delete();
                 }
-                $company->addMediaFromRequest('logo')->toMediaCollection('logo');
+                $company->addMedia(storage_path('tmp/uploads/'.basename($request->input('logo'))))->toMediaCollection('logo');
             }
         } elseif ($company->logo) {
             $company->logo->delete();
