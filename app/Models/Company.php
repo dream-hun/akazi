@@ -11,10 +11,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\Image\Enums\Fit;
 
 class Company extends Model implements HasMedia
 {
-    use HasFactory, InteractsWithMedia, Sluggable,SoftDeletes;
+    use HasFactory, InteractsWithMedia, Sluggable, SoftDeletes;
 
     public $table = 'companies';
 
@@ -48,8 +49,8 @@ class Company extends Model implements HasMedia
 
     public function registerMediaConversions(?Media $media = null): void
     {
-        $this->addMediaConversion('thumb')->fit('crop', 50, 50);
-        $this->addMediaConversion('preview')->fit('crop', 120, 120);
+        $this->addMediaConversion('thumb')->fit(Fit::Contain, 50, 50);
+        $this->addMediaConversion('preview')->fit(Fit::Contain, 'crop', 120, 120);
     }
 
     public function getLogoAttribute()
