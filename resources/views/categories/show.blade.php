@@ -45,8 +45,8 @@
                                 class="flex items-center bg-white p-4 rounded-lg shadow-none border border-blue-500">
                                 <div class="mr-4">
 
-                                    <img src="{{ $advert->company->logo->getUrl() }}" alt="{{ $advert->company->name }}"
-                                        class="w-full h-20 object-cover">
+                                    <img src="{{ $advert->company->getFirstMediaUrl('logo') }}"
+                                        alt="{{ $advert->company->name }}" class="w-full h-20 object-cover">
 
                                 </div>
                                 <div>
