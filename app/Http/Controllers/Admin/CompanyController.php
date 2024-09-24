@@ -8,6 +8,7 @@ use App\Http\Requests\MassDestroyCompanyRequest;
 use App\Http\Requests\StoreCompanyRequest;
 use App\Http\Requests\UpdateCompanyRequest;
 use App\Models\Company;
+use Spatie\Image\Manipulations;
 use Gate;
 use Illuminate\Http\Request;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -38,9 +39,15 @@ class CompanyController extends Controller
         $company = Company::create($request->all());
 
         if ($request->input('logo', false)) {
-            $company->addMedia(storage_path('tmp/uploads/' . basename($request->input('logo'))))->toMediaCollection('logo');
+            $company->addMedia(storage_path('tmp/uploads/' . basename($request->input('logo'))))
+                ->withManipulations([
+                    '*' => function ($image) {
+                        $image->fit(Manipulations::FIT_CONTAIN, 200, 200);
+                    }
+                ])
+                ->toMediaCollection('logo');
         }
-
+        
         if ($media = $request->input('ck-media', false)) {
             Media::whereIn('id', $media)->update(['model_id' => $company->id]);
         }
@@ -64,7 +71,13 @@ class CompanyController extends Controller
                 if ($company->logo) {
                     $company->logo->delete();
                 }
-                $company->addMedia(storage_path('tmp/uploads/' . basename($request->input('logo'))))->toMediaCollection('logo');
+                $company->addMedia(storage_path('tmp/uploads/' . basename($request->input('logo'))))
+                    ->withManipulations([
+                        '*' => function ($image) {
+                            $image->fit(Manipulations::FIT_CONTAIN, 200, 200);
+                        }
+                    ])
+                    ->toMediaCollection('logo');
             }
         } elseif ($company->logo) {
             $company->logo->delete();
