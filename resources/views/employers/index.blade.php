@@ -35,7 +35,7 @@
                         <a href="{{ route('employers.show', $company->slug) }}"
                             class="flex flex-col items-center bg-white border border-blue-600 rounded-lg shadow md:flex-row md:max-w-xl">
 
-                            <img class="object-cover w-full rounded-t-lg h-86 md:h-auto md:w-40 md:rounded-none md:rounded-l-lg"
+                            <img class="object-cover w-full rounded-t-lg h-auto md:h-auto md:w-40 md:rounded-none md:rounded-l-lg"
                                 src="{{ $company->getFirstMediaUrl('logo') }}" alt="{{ $company->name }}">
 
                             <div class="flex flex-col justify-between p-4 leading-normal">

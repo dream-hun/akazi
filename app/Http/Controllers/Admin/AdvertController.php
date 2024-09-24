@@ -10,6 +10,7 @@ use App\Http\Requests\UpdateAdvertRequest;
 use App\Models\Advert;
 use App\Models\Category;
 use App\Models\Company;
+use App\Models\User;
 use Gate;
 use Illuminate\Http\Request;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -23,7 +24,7 @@ class AdvertController extends Controller
     {
         abort_if(Gate::denies('advert_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $adverts = Advert::with(['company', 'category', 'user'])->get();
+        $adverts = Advert::with(['category', 'company', 'user'])->get();
 
         return view('admin.adverts.index', compact('adverts'));
     }
@@ -32,17 +33,19 @@ class AdvertController extends Controller
     {
         abort_if(Gate::denies('advert_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        $categories = Category::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
         $companies = Company::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $categories = Category::pluck('name', 'id');
+        $users = User::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.adverts.create', compact('categories', 'companies'));
+        return view('admin.adverts.create', compact('categories', 'companies', 'users'));
     }
 
     public function store(StoreAdvertRequest $request)
     {
-        $user = auth()->user()->id;
-        $advert = Advert::create(array_merge($request->all(), ['user_id' => $user]));
+        $advert = Advert::create($request->all());
+
         if ($media = $request->input('ck-media', false)) {
             Media::whereIn('id', $media)->update(['model_id' => $advert->id]);
         }
@@ -54,19 +57,20 @@ class AdvertController extends Controller
     {
         abort_if(Gate::denies('advert_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        $categories = Category::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
         $companies = Company::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $categories = Category::pluck('name', 'id');
+        $users = User::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $advert->load('company', 'categories');
+        $advert->load('category', 'company', 'user');
 
         return view('admin.adverts.edit', compact('advert', 'categories', 'companies', 'users'));
     }
 
     public function update(UpdateAdvertRequest $request, Advert $advert)
     {
-        $user = auth()->user()->id;
-        $advert->update(array_merge($request->all(), ['user_id' => $user]));
+        $advert->update($request->all());
 
         return redirect()->route('admin.adverts.index');
     }
@@ -75,7 +79,7 @@ class AdvertController extends Controller
     {
         abort_if(Gate::denies('advert_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $advert->load('company', 'categories', 'user');
+        $advert->load('category', 'company', 'user');
 
         return view('admin.adverts.show', compact('advert'));
     }
@@ -104,10 +108,10 @@ class AdvertController extends Controller
     {
         abort_if(Gate::denies('advert_create') && Gate::denies('advert_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $model = new Advert;
-        $model->id = $request->input('crud_id', 0);
+        $model         = new Advert();
+        $model->id     = $request->input('crud_id', 0);
         $model->exists = true;
-        $media = $model->addMediaFromRequest('upload')->toMediaCollection('ck-media');
+        $media         = $model->addMediaFromRequest('upload')->toMediaCollection('ck-media');
 
         return response()->json(['id' => $media->id, 'url' => $media->getUrl()], Response::HTTP_CREATED);
     }

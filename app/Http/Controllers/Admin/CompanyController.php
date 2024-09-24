@@ -38,7 +38,7 @@ class CompanyController extends Controller
         $company = Company::create($request->all());
 
         if ($request->input('logo', false)) {
-            $company->addMedia(storage_path('tmp/uploads/'.basename($request->input('logo'))))->toMediaCollection('logo');
+            $company->addMedia(storage_path('tmp/uploads/' . basename($request->input('logo'))))->toMediaCollection('logo');
         }
 
         if ($media = $request->input('ck-media', false)) {
@@ -64,7 +64,7 @@ class CompanyController extends Controller
                 if ($company->logo) {
                     $company->logo->delete();
                 }
-                $company->addMedia(storage_path('tmp/uploads/'.basename($request->input('logo'))))->toMediaCollection('logo');
+                $company->addMedia(storage_path('tmp/uploads/' . basename($request->input('logo'))))->toMediaCollection('logo');
             }
         } elseif ($company->logo) {
             $company->logo->delete();
@@ -104,10 +104,10 @@ class CompanyController extends Controller
     {
         abort_if(Gate::denies('company_create') && Gate::denies('company_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $model = new Company;
-        $model->id = $request->input('crud_id', 0);
+        $model         = new Company();
+        $model->id     = $request->input('crud_id', 0);
         $model->exists = true;
-        $media = $model->addMediaFromRequest('upload')->toMediaCollection('ck-media');
+        $media         = $model->addMediaFromRequest('upload')->toMediaCollection('ck-media');
 
         return response()->json(['id' => $media->id, 'url' => $media->getUrl()], Response::HTTP_CREATED);
     }

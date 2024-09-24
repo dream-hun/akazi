@@ -10,9 +10,26 @@
                 @method('PUT')
                 @csrf
                 <div class="form-group">
+                    <label class="required" for="category_id">{{ trans('cruds.advert.fields.category') }}</label>
+                    <select class="form-control select2 {{ $errors->has('category') ? 'is-invalid' : '' }}"
+                        name="category_id" id="category_id" required>
+                        @foreach ($categories as $id => $entry)
+                            <option value="{{ $id }}"
+                                {{ (old('category_id') ? old('category_id') : $advert->category->id ?? '') == $id ? 'selected' : '' }}>
+                                {{ $entry }}</option>
+                        @endforeach
+                    </select>
+                    @if ($errors->has('category'))
+                        <div class="invalid-feedback">
+                            {{ $errors->first('category') }}
+                        </div>
+                    @endif
+                    <span class="help-block">{{ trans('cruds.advert.fields.category_helper') }}</span>
+                </div>
+                <div class="form-group">
                     <label class="required" for="company_id">{{ trans('cruds.advert.fields.company') }}</label>
-                    <select class="form-control select2 {{ $errors->has('company') ? 'is-invalid' : '' }}" name="company_id"
-                        id="company_id" required>
+                    <select class="form-control select2 {{ $errors->has('company') ? 'is-invalid' : '' }}"
+                        name="company_id" id="company_id" required>
                         @foreach ($companies as $id => $entry)
                             <option value="{{ $id }}"
                                 {{ (old('company_id') ? old('company_id') : $advert->company->id ?? '') == $id ? 'selected' : '' }}>
@@ -48,9 +65,9 @@
                     <span class="help-block">{{ trans('cruds.advert.fields.body_helper') }}</span>
                 </div>
                 <div class="form-group">
-                    <label for="deadline">{{ trans('cruds.advert.fields.deadline') }}</label>
-                    <input class="form-control datetime {{ $errors->has('deadline') ? 'is-invalid' : '' }}" type="text"
-                        name="deadline" id="deadline" value="{{ old('deadline', $advert->deadline) }}">
+                    <label class="required" for="deadline">{{ trans('cruds.advert.fields.deadline') }}</label>
+                    <input class="form-control date {{ $errors->has('deadline') ? 'is-invalid' : '' }}" type="text"
+                        name="deadline" id="deadline" value="{{ old('deadline', $advert->deadline) }}" required>
                     @if ($errors->has('deadline'))
                         <div class="invalid-feedback">
                             {{ $errors->first('deadline') }}
@@ -70,9 +87,17 @@
                     <span class="help-block">{{ trans('cruds.advert.fields.location_helper') }}</span>
                 </div>
                 <div class="form-group">
-                    <label class="required" for="sector">{{ trans('cruds.advert.fields.sector') }}</label>
-                    <input class="form-control {{ $errors->has('sector') ? 'is-invalid' : '' }}" type="text"
-                        name="sector" id="sector" value="{{ old('sector', $advert->sector) }}" required>
+                    <label>{{ trans('cruds.advert.fields.sector') }}</label>
+                    <select class="form-control {{ $errors->has('sector') ? 'is-invalid' : '' }}" name="sector"
+                        id="sector">
+                        <option value disabled {{ old('sector', null) === null ? 'selected' : '' }}>
+                            {{ trans('global.pleaseSelect') }}</option>
+                        @foreach (App\Models\Advert::SECTOR_SELECT as $key => $label)
+                            <option value="{{ $key }}"
+                                {{ old('sector', $advert->sector) === (string) $key ? 'selected' : '' }}>
+                                {{ $label }}</option>
+                        @endforeach
+                    </select>
                     @if ($errors->has('sector'))
                         <div class="invalid-feedback">
                             {{ $errors->first('sector') }}
@@ -136,6 +161,23 @@
                     <span class="help-block">{{ trans('cruds.advert.fields.number_of_positions_helper') }}</span>
                 </div>
                 <div class="form-group">
+                    <label for="user_id">{{ trans('cruds.advert.fields.user') }}</label>
+                    <select class="form-control select2 {{ $errors->has('user') ? 'is-invalid' : '' }}" name="user_id"
+                        id="user_id">
+                        @foreach ($users as $id => $entry)
+                            <option value="{{ $id }}"
+                                {{ (old('user_id') ? old('user_id') : $advert->user->id ?? '') == $id ? 'selected' : '' }}>
+                                {{ $entry }}</option>
+                        @endforeach
+                    </select>
+                    @if ($errors->has('user'))
+                        <div class="invalid-feedback">
+                            {{ $errors->first('user') }}
+                        </div>
+                    @endif
+                    <span class="help-block">{{ trans('cruds.advert.fields.user_helper') }}</span>
+                </div>
+                <div class="form-group">
                     <label>{{ trans('cruds.advert.fields.status') }}</label>
                     <select class="form-control {{ $errors->has('status') ? 'is-invalid' : '' }}" name="status"
                         id="status">
@@ -153,24 +195,6 @@
                         </div>
                     @endif
                     <span class="help-block">{{ trans('cruds.advert.fields.status_helper') }}</span>
-                </div>
-
-                <div class="form-group">
-                    <label class="required" for="category_id">{{ trans('cruds.advert.fields.category') }}</label>
-                    <select class="form-control select2 {{ $errors->has('category') ? 'is-invalid' : '' }}"
-                        name="category_id" id="category_id" required>
-                        @foreach ($categories as $id => $entry)
-                            <option value="{{ $id }}"
-                                {{ (old('category_id') ? old('category_id') : $advert->category->id ?? '') == $id ? 'selected' : '' }}>
-                                {{ $entry }}</option>
-                        @endforeach
-                    </select>
-                    @if ($errors->has('category'))
-                        <div class="invalid-feedback">
-                            {{ $errors->first('category') }}
-                        </div>
-                    @endif
-                    <span class="help-block">{{ trans('cruds.advert.fields.category_helper') }}</span>
                 </div>
                 <div class="form-group">
                     <button class="btn btn-danger" type="submit">

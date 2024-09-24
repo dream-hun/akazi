@@ -11,11 +11,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Spatie\Image\Enums\Fit;
 
 class Company extends Model implements HasMedia
 {
-    use HasFactory, InteractsWithMedia, Sluggable, SoftDeletes;
+    use SoftDeletes, InteractsWithMedia, HasFactory, Sluggable;
 
     public $table = 'companies';
 
@@ -47,24 +46,23 @@ class Company extends Model implements HasMedia
         return $date->format('Y-m-d H:i:s');
     }
 
-    public function registerMediaConversions(?Media $media = null): void
+    public function registerMediaConversions(Media $media = null): void
     {
-        $this->addMediaConversion('thumb')->fit(Fit::Contain, 50, 50);
-        $this->addMediaConversion('preview')->fit(Fit::Contain, 'crop', 120, 120);
+        $this->addMediaConversion('thumb')->fit('crop', 50, 50);
+        $this->addMediaConversion('preview')->fit('crop', 120, 120);
     }
 
     public function getLogoAttribute()
     {
         $file = $this->getMedia('logo')->last();
         if ($file) {
-            $file->url = $file->getUrl();
+            $file->url       = $file->getUrl();
             $file->thumbnail = $file->getUrl('thumb');
-            $file->preview = $file->getUrl('preview');
+            $file->preview   = $file->getUrl('preview');
         }
 
         return $file;
     }
-
     /**
      * Return the sluggable configuration array for this model.
      */
@@ -76,7 +74,6 @@ class Company extends Model implements HasMedia
             ],
         ];
     }
-
     public function adverts(): HasMany
     {
         return $this->hasMany(Advert::class);

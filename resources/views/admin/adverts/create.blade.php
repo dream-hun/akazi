@@ -9,9 +9,25 @@
             <form method="POST" action="{{ route('admin.adverts.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
+                    <label class="required" for="category_id">{{ trans('cruds.advert.fields.category') }}</label>
+                    <select class="form-control select2 {{ $errors->has('category') ? 'is-invalid' : '' }}"
+                        name="category_id" id="category_id" required>
+                        @foreach ($categories as $id => $entry)
+                            <option value="{{ $id }}" {{ old('category_id') == $id ? 'selected' : '' }}>
+                                {{ $entry }}</option>
+                        @endforeach
+                    </select>
+                    @if ($errors->has('category'))
+                        <div class="invalid-feedback">
+                            {{ $errors->first('category') }}
+                        </div>
+                    @endif
+                    <span class="help-block">{{ trans('cruds.advert.fields.category_helper') }}</span>
+                </div>
+                <div class="form-group">
                     <label class="required" for="company_id">{{ trans('cruds.advert.fields.company') }}</label>
-                    <select class="form-control select2 {{ $errors->has('company') ? 'is-invalid' : '' }}" name="company_id"
-                        id="company_id" required>
+                    <select class="form-control select2 {{ $errors->has('company') ? 'is-invalid' : '' }}"
+                        name="company_id" id="company_id" required>
                         @foreach ($companies as $id => $entry)
                             <option value="{{ $id }}" {{ old('company_id') == $id ? 'selected' : '' }}>
                                 {{ $entry }}</option>
@@ -46,9 +62,9 @@
                     <span class="help-block">{{ trans('cruds.advert.fields.body_helper') }}</span>
                 </div>
                 <div class="form-group">
-                    <label for="deadline">{{ trans('cruds.advert.fields.deadline') }}</label>
-                    <input class="form-control datetime {{ $errors->has('deadline') ? 'is-invalid' : '' }}" type="text"
-                        name="deadline" id="deadline" value="{{ old('deadline') }}">
+                    <label class="required" for="deadline">{{ trans('cruds.advert.fields.deadline') }}</label>
+                    <input class="form-control date {{ $errors->has('deadline') ? 'is-invalid' : '' }}" type="text"
+                        name="deadline" id="deadline" value="{{ old('deadline') }}" required>
                     @if ($errors->has('deadline'))
                         <div class="invalid-feedback">
                             {{ $errors->first('deadline') }}
@@ -68,9 +84,16 @@
                     <span class="help-block">{{ trans('cruds.advert.fields.location_helper') }}</span>
                 </div>
                 <div class="form-group">
-                    <label class="required" for="sector">{{ trans('cruds.advert.fields.sector') }}</label>
-                    <input class="form-control {{ $errors->has('sector') ? 'is-invalid' : '' }}" type="text"
-                        name="sector" id="sector" value="{{ old('sector', '') }}" required>
+                    <label>{{ trans('cruds.advert.fields.sector') }}</label>
+                    <select class="form-control {{ $errors->has('sector') ? 'is-invalid' : '' }}" name="sector"
+                        id="sector">
+                        <option value disabled {{ old('sector', null) === null ? 'selected' : '' }}>
+                            {{ trans('global.pleaseSelect') }}</option>
+                        @foreach (App\Models\Advert::SECTOR_SELECT as $key => $label)
+                            <option value="{{ $key }}"
+                                {{ old('sector', '') === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
+                        @endforeach
+                    </select>
                     @if ($errors->has('sector'))
                         <div class="invalid-feedback">
                             {{ $errors->first('sector') }}
@@ -108,7 +131,7 @@
                             {{ trans('global.pleaseSelect') }}</option>
                         @foreach (App\Models\Advert::CONTRACT_TYPE_SELECT as $key => $label)
                             <option value="{{ $key }}"
-                                {{ old('contract_type', '') === (string) $key ? 'selected' : '' }}>{{ $label }}
+                                {{ old('contract_type', '1') === (string) $key ? 'selected' : '' }}>{{ $label }}
                             </option>
                         @endforeach
                     </select>
@@ -132,6 +155,22 @@
                     <span class="help-block">{{ trans('cruds.advert.fields.number_of_positions_helper') }}</span>
                 </div>
                 <div class="form-group">
+                    <label for="user_id">{{ trans('cruds.advert.fields.user') }}</label>
+                    <select class="form-control select2 {{ $errors->has('user') ? 'is-invalid' : '' }}" name="user_id"
+                        id="user_id">
+                        @foreach ($users as $id => $entry)
+                            <option value="{{ $id }}" {{ old('user_id') == $id ? 'selected' : '' }}>
+                                {{ $entry }}</option>
+                        @endforeach
+                    </select>
+                    @if ($errors->has('user'))
+                        <div class="invalid-feedback">
+                            {{ $errors->first('user') }}
+                        </div>
+                    @endif
+                    <span class="help-block">{{ trans('cruds.advert.fields.user_helper') }}</span>
+                </div>
+                <div class="form-group">
                     <label>{{ trans('cruds.advert.fields.status') }}</label>
                     <select class="form-control {{ $errors->has('status') ? 'is-invalid' : '' }}" name="status"
                         id="status">
@@ -149,22 +188,6 @@
                         </div>
                     @endif
                     <span class="help-block">{{ trans('cruds.advert.fields.status_helper') }}</span>
-                </div>
-                <div class="form-group">
-                    <label class="required" for="category_id">{{ trans('cruds.advert.fields.category') }}</label>
-                    <select class="form-control select2 {{ $errors->has('category') ? 'is-invalid' : '' }}"
-                        name="category_id" id="category_id" required>
-                        @foreach ($categories as $id => $entry)
-                            <option value="{{ $id }}" {{ old('category_id') == $id ? 'selected' : '' }}>
-                                {{ $entry }}</option>
-                        @endforeach
-                    </select>
-                    @if ($errors->has('category'))
-                        <div class="invalid-feedback">
-                            {{ $errors->first('category') }}
-                        </div>
-                    @endif
-                    <span class="help-block">{{ trans('cruds.advert.fields.category_helper') }}</span>
                 </div>
                 <div class="form-group">
                     <button class="btn btn-danger" type="submit">
@@ -212,7 +235,7 @@
                                                     .message ?
                                                     `${genericErrorText}\n${xhr.status} ${response.message}` :
                                                     `${genericErrorText}\n ${xhr.status} ${xhr.statusText}`
-                                                );
+                                                    );
                                             }
 
                                             $('form').append(
@@ -226,7 +249,7 @@
 
                                         if (xhr.upload) {
                                             xhr.upload.addEventListener('progress', function(
-                                                e) {
+                                            e) {
                                                 if (e.lengthComputable) {
                                                     loader.uploadTotal = e.total;
                                                     loader.uploaded = e.loaded;
