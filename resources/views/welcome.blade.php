@@ -86,8 +86,8 @@
                                     {{ $advert->title ?? '-' }}</h5>
                                 <blockquote class="text-md sm:text-sm text-gray-900 hidden md:block">
                                     {{ $advert->company->name ?? '-' }}| Location: {{ $advert->location ?? '-' }}|
-                                    Published on: {{ $advert->formatted_date ?? '-' }}| Deadline:
-                                    {{ $advert->formatted_deadline ?? '-' }}| Experience:
+                                    Published on: {{ $advert->formattedPublish() ?? '-' }}| Deadline:
+                                    {{ $advert->deadline ?? '-' }}| Experience:
                                     {{ $advert->desired_experience ?? 'Not specified' }}
                                 </blockquote>
                                 <div class="mt-2 text-gray-600">

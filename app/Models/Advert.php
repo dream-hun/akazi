@@ -16,7 +16,7 @@ class Advert extends Model implements HasMedia
 {
     use SoftDeletes, InteractsWithMedia, HasFactory, Sluggable;
 
-    public $table = 'adverts';
+    protected $table = 'adverts';
 
     public const SECTOR_SELECT = [
         '1' => 'Private Sector',
@@ -30,10 +30,14 @@ class Advert extends Model implements HasMedia
         'deleted_at',
     ];
 
+    protected $casts = [
+        'deadline' => 'datetime',  // Casts 'deadline' to Carbon instance
+    ];
+
     public const CONTRACT_TYPE_SELECT = [
-        '1' => 'Full Time  at Site',
+        '1' => 'Full Time at Site',
         '2' => 'Full Time Remote',
-        '3' => 'Part Time  Remote',
+        '3' => 'Part Time Remote',
     ];
 
     public const STATUS_SELECT = [
@@ -63,7 +67,7 @@ class Advert extends Model implements HasMedia
         'deleted_at',
     ];
 
-    protected function serializeDate(DateTimeInterface $date)
+    protected function serializeDate(DateTimeInterface $date): string
     {
         return $date->format('Y-m-d H:i:s');
     }
@@ -84,29 +88,32 @@ class Advert extends Model implements HasMedia
         return $this->belongsTo(Company::class, 'company_id');
     }
 
-    public function getDeadlineAttribute($value)
-    {
-        return $value ? Carbon::parse($value)->format(config('panel.date_format')) : null;
-    }
-
-    public function setDeadlineAttribute($value)
-    {
-        $this->attributes['deadline'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
-    }
-
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
-    /**
-     * Return the sluggable configuration array for this model.
-     */
+
+    public function getDeadlineAttribute($value): ?string
+    {
+        return $value ? Carbon::parse($value)->format(config('panel.date_format')) : null;
+    }
+
+    public function setDeadlineAttribute($value): void
+    {
+        $this->attributes['deadline'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
+    }
+
     public function sluggable(): array
     {
         return [
             'slug' => [
-                'source' => 'name',
+                'source' => 'title',
             ],
         ];
+    }
+
+    public function formattedPublish(): string
+    {
+        return $this->created_at->diffForHumans();
     }
 }

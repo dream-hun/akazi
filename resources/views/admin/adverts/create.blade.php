@@ -8,37 +8,39 @@
         <div class="card-body">
             <form method="POST" action="{{ route('admin.adverts.store') }}" enctype="multipart/form-data">
                 @csrf
-                <div class="form-group">
-                    <label class="required" for="category_id">{{ trans('cruds.advert.fields.category') }}</label>
-                    <select class="form-control select2 {{ $errors->has('category') ? 'is-invalid' : '' }}"
-                        name="category_id" id="category_id" required>
-                        @foreach ($categories as $id => $entry)
-                            <option value="{{ $id }}" {{ old('category_id') == $id ? 'selected' : '' }}>
-                                {{ $entry }}</option>
-                        @endforeach
-                    </select>
-                    @if ($errors->has('category'))
-                        <div class="invalid-feedback">
-                            {{ $errors->first('category') }}
-                        </div>
-                    @endif
-                    <span class="help-block">{{ trans('cruds.advert.fields.category_helper') }}</span>
-                </div>
-                <div class="form-group">
-                    <label class="required" for="company_id">{{ trans('cruds.advert.fields.company') }}</label>
-                    <select class="form-control select2 {{ $errors->has('company') ? 'is-invalid' : '' }}"
-                        name="company_id" id="company_id" required>
-                        @foreach ($companies as $id => $entry)
-                            <option value="{{ $id }}" {{ old('company_id') == $id ? 'selected' : '' }}>
-                                {{ $entry }}</option>
-                        @endforeach
-                    </select>
-                    @if ($errors->has('company'))
-                        <div class="invalid-feedback">
-                            {{ $errors->first('company') }}
-                        </div>
-                    @endif
-                    <span class="help-block">{{ trans('cruds.advert.fields.company_helper') }}</span>
+                <div class="row col-md-12">
+                    <div class="form-group">
+                        <label class="required" for="category_id">{{ trans('cruds.advert.fields.category') }}</label>
+                        <select class="form-control select2 {{ $errors->has('category') ? 'is-invalid' : '' }}"
+                            name="category_id" id="category_id" required>
+                            @foreach ($categories as $id => $entry)
+                                <option value="{{ $id }}" {{ old('category_id') == $id ? 'selected' : '' }}>
+                                    {{ $entry }}</option>
+                            @endforeach
+                        </select>
+                        @if ($errors->has('category'))
+                            <div class="invalid-feedback">
+                                {{ $errors->first('category') }}
+                            </div>
+                        @endif
+                        <span class="help-block">{{ trans('cruds.advert.fields.category_helper') }}</span>
+                    </div>
+                    <div class="form-group">
+                        <label class="required" for="company_id">{{ trans('cruds.advert.fields.company') }}</label>
+                        <select class="form-control select2 {{ $errors->has('company') ? 'is-invalid' : '' }}"
+                            name="company_id" id="company_id" required>
+                            @foreach ($companies as $id => $entry)
+                                <option value="{{ $id }}" {{ old('company_id') == $id ? 'selected' : '' }}>
+                                    {{ $entry }}</option>
+                            @endforeach
+                        </select>
+                        @if ($errors->has('company'))
+                            <div class="invalid-feedback">
+                                {{ $errors->first('company') }}
+                            </div>
+                        @endif
+                        <span class="help-block">{{ trans('cruds.advert.fields.company_helper') }}</span>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label class="required" for="title">{{ trans('cruds.advert.fields.title') }}</label>
@@ -235,7 +237,7 @@
                                                     .message ?
                                                     `${genericErrorText}\n${xhr.status} ${response.message}` :
                                                     `${genericErrorText}\n ${xhr.status} ${xhr.statusText}`
-                                                    );
+                                                );
                                             }
 
                                             $('form').append(
@@ -249,7 +251,7 @@
 
                                         if (xhr.upload) {
                                             xhr.upload.addEventListener('progress', function(
-                                            e) {
+                                                e) {
                                                 if (e.lengthComputable) {
                                                     loader.uploadTotal = e.total;
                                                     loader.uploaded = e.loaded;

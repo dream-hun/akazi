@@ -32,8 +32,8 @@ class StoreAdvertRequest extends FormRequest
                 'required',
             ],
             'deadline' => [
-                'date_format:'.config('panel.date_format').' '.config('panel.time_format'),
-                'nullable',
+                'required',
+                'date_format:' . config('panel.date_format'),
             ],
             'location' => [
                 'string',

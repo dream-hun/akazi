@@ -26,14 +26,14 @@ class UpdateAdvertRequest extends FormRequest
             'title' => [
                 'string',
                 'required',
-                'unique:adverts,title,'.request()->route('advert')->id,
+                'unique:adverts,title,' . request()->route('advert')->id,
             ],
             'body' => [
                 'required',
             ],
             'deadline' => [
-                'date_format:'.config('panel.date_format').' '.config('panel.time_format'),
-                'nullable',
+                'required',
+                'date_format:' . config('panel.date_format'),
             ],
             'location' => [
                 'string',
