@@ -93,14 +93,14 @@ class Advert extends Model implements HasMedia
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function getDeadlineAttribute($value): ?string
+    public function getDeadlineAttribute($value)
     {
         return $value ? Carbon::parse($value)->format(config('panel.date_format')) : null;
     }
 
-    public function setDeadlineAttribute($value): void
+    public function setDeadlineAttribute($value)
     {
-        $this->attributes['deadline'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
+        $this->attributes['deadline'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('d-m-Y') : null;
     }
 
     public function sluggable(): array
