@@ -35,7 +35,7 @@ Route::post('/subscribe', StoreSubscriberController::class)->name('subscriber');
 Route::view('/about-us', 'about.index')->name('about-us');
 Route::view('/privacy-and-policy', 'privacy-and-policy')->name('privacy');
 Route::get('/faqs', function () {
-    $faqs = Faq::where('status', '=', 'published')->get();
+    $faqs = Faq::where('status', '=', 'active')->get();
 
     return view('faq', ['faqs' => $faqs]);
 })->name('faqs');
@@ -94,7 +94,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
 
     // Subscriber
     Route::resource('subscribers', SubscriberController::class, ['except' => ['create', 'store', 'edit', 'update', 'show', 'destroy']]);
-
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'middleware' => ['auth']], function () {
     // Change password
