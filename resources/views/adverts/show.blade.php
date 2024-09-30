@@ -35,11 +35,15 @@
                     <section class="w-full md:w-2/3 flex flex-col items-center px-3">
 
                         <article class="flex flex-col shadow-sm my-4">
-                            <div class="bg-white flex flex-col rounded-md justify-start p-6">
+                            <div
+                                class="bg-white flex flex-col rounded-md justify-start p-6 [&>ul]:list-disc [&>:ul]:ml-4">
 
-                                <h1 class="py-4 text-pretty text-left font-bold text-2xl">{{ $advert->title ?? '-' }}
+
+                                <h1 class="py-4 text-pretty text-left font-bold text-2xl">
+                                    {{ $advert->title ?? '-' }}
                                 </h1>
-                                <p class="pb-6">{!! $advert->body !!}</p>
+                                <p class="pb-6"> {!! Str::markdown($advert->body) !!}</p>
+
 
                             </div>
                         </article>
@@ -61,16 +65,17 @@
                                         Sector: {{ $advert->sector ?? '-' }}
                                     </li>
                                     <li class="px-6 py-4">
-                                        Education level: {{ $advert->eductaion_level ?? '-' }}
+                                        Education level: {{ $advert->education_level ?? '-' }}
                                     </li>
                                     <li class="px-6 py-4">
                                         Experience: {{ $advert->desired_experience ?? '-' }}
                                     </li>
                                     <li class="px-6 py-4">
-                                        Email: {{ $advert->institution->email ?? '-' }}
+                                        Email: {{ $advert->company->email ?? '-' }}
                                     </li>
                                     <li class="px-6 py-4">
-                                        Contract Type: {{ $advert->contract_type ?? '-' }}
+                                        Contract Type:
+                                        {{ App\Models\Advert::CONTRACT_TYPE_SELECT[$advert->contract_type] ?? '' }}
                                     </li>
                                     <li class="px-6 py-4">
                                         Available positions: {{ $advert->number_of_positions ?? '-' }}
