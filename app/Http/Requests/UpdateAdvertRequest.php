@@ -33,7 +33,6 @@ class UpdateAdvertRequest extends FormRequest
             ],
             'deadline' => [
                 'required',
-                'date_format:' . config('panel.date_format'),
             ],
             'location' => [
                 'string',
