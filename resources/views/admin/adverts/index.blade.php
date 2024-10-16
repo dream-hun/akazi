@@ -61,7 +61,7 @@
                                     {{ $advert->title ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $advert->deadline ?? '' }}
+                                    {{ $advert->formattedDeadline() ?? '' }}
                                 </td>
                                 <td>
                                     {{ $advert->number_of_positions ?? '' }}

@@ -42,7 +42,7 @@
                                 <h1 class="py-4 text-pretty text-left font-bold text-2xl">
                                     {{ $advert->title ?? '-' }}
                                 </h1>
-                                <p class="pb-6"> {!! Str::markdown($advert->body) !!}</p>
+                                <p class="mx-auto ckeditor-content"> {!! $advert->body !!}</p>
 
 
                             </div>

@@ -19,8 +19,21 @@ class Advert extends Model implements HasMedia
     protected $table = 'adverts';
 
     public const SECTOR_SELECT = [
-        '1' => 'Private Sector',
-        '2' => 'Government',
+        '1' => 'Private',
+        '2' => 'Public',
+        '3' => 'UN',
+        '4' => 'NGO',
+        '5' => 'Other',
+    ];
+
+    public const EDUCACTION_LEVEL = [
+        '1' => 'Not defined',
+        '2' => 'Secondary',
+        '3' => 'TVET',
+        '4' => 'Bachelor',
+        '5' => 'Diploma',
+        '6' => 'Masters',
+        '7' => 'Bachelor',
     ];
 
     protected $dates = [
@@ -31,7 +44,7 @@ class Advert extends Model implements HasMedia
     ];
 
     protected $casts = [
-        'deadline' => 'datetime',  // Casts 'deadline' to Carbon instance
+        'deadline' => 'date',  // Casts 'deadline' to Carbon instance
     ];
 
     public const CONTRACT_TYPE_SELECT = [
@@ -67,11 +80,6 @@ class Advert extends Model implements HasMedia
         'deleted_at',
     ];
 
-    protected function serializeDate(DateTimeInterface $date): string
-    {
-        return $date->format('Y-m-d H:i:s');
-    }
-
     public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('thumb')->fit('crop', 50, 50);
@@ -106,5 +114,9 @@ class Advert extends Model implements HasMedia
     public function formattedPublish(): string
     {
         return $this->created_at->diffForHumans();
+    }
+    public function formattedDeadline(): string
+    {
+        return $this->deadline->diffForHumans();
     }
 }
