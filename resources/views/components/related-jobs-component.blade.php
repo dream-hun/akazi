@@ -5,7 +5,7 @@
                 <div class="flex items-start gap-x-3 mt-5">
                     <img class="h-12 w-12 flex-none rounded-full bg-gray-50"
                          src="{{ $advert->company->getFirstMediaUrl('logo') ?? '-' }}" alt="">
-                    <p class="text-sm font-semibold leading-6 text-gray-900">{{ $advert->company->name ?? '-' }}</p>
+                    <p class="text-sm font-semibold leading-6 text-gray-900">{{ $advert->title ?? '-' }}</p>
                     <p
                         class="rounded-md whitespace-nowrap mt-0.5 px-1.5 py-0.5 text-xs font-medium ring-1 ring-inset text-green-700 bg-green-50 ring-green-600/20">
                         {{ $advert->category->name ?? '-' }}</p>

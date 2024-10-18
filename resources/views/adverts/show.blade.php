@@ -34,15 +34,14 @@
                     <!-- Posts Section -->
                     <section class="w-full md:w-2/3 flex flex-col items-center px-3">
 
-                        <article class="flex flex-col shadow-sm my-4">
-                            <div
-                                class="bg-white flex flex-col rounded-md justify-start p-6 [&>ul]:list-disc [&>:ul]:ml-4">
+                        <article class="flex flex-col shadow-sm my-4 prose prose:xl ">
+                            <div class="bg-white py-8 px-8">
 
 
                                 <h1 class="py-4 text-pretty text-left font-bold text-2xl">
                                     {{ $advert->title ?? '-' }}
                                 </h1>
-                                <p class="mx-auto ckeditor-content"> {!! $advert->body !!}</p>
+                                <p>{!! $advert->body !!}</p>
 
 
                             </div>
