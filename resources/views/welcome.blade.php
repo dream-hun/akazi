@@ -81,13 +81,17 @@
                                     alt="{{ $advert->company->name }}" class="w-full h-20 object-cover">
 
                             </div>
+
                             <div>
-                                <h5 class="mb-2 text-md font-semibold tracking-tight text-gray-900 dark:text-white">
-                                    {{ $advert->title ?? '-' }}</h5>
+                                <h4 class="py-2 text-md font-semibold tracking-tight text-gray-900 dark:text-white">
+                                    {{ $advert->title ?? '-' }}</h4>
+                                <h5 class="text-blue-700 text-md font-bold tracking-tight py-2">
+                                    {{ $advert->company->name ?? '-' }}
+                                </h5>
                                 <blockquote class="text-md sm:text-sm text-gray-900 hidden md:block">
-                                    {{ $advert->company->name ?? '-' }}| Location: {{ $advert->location ?? '-' }}|
+                                   Location: {{ $advert->location ?? '-' }}|
                                     Published on: {{ $advert->formattedPublish() ?? '-' }}| Deadline:
-                                    {{ $advert->deadline ?? '-' }}| Experience:
+                                    {{ $advert->formattedDeadline() ?? '-' }}| Experience:
                                     {{ $advert->desired_experience ?? 'Not specified' }}
                                 </blockquote>
                                 <div class="mt-2 text-gray-600">

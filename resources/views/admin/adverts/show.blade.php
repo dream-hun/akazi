@@ -51,7 +51,7 @@
                                 {{ trans('cruds.advert.fields.deadline') }}
                             </th>
                             <td>
-                                {{ $advert->deadline }}
+                                {{ $advert->formattedDeadline() }}
                             </td>
                         </tr>
                         <tr>
@@ -75,7 +75,7 @@
                                 {{ trans('cruds.advert.fields.education_level') }}
                             </th>
                             <td>
-                                {{ $advert->education_level }}
+                                {{ App\Models\Advert::EDUCATION_LEVEL[$advert->education_level] ?? '' }}
                             </td>
                         </tr>
                         <tr>

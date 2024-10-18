@@ -31,6 +31,7 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
                 <div role="list" class="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
+
                     @foreach ($companies as $company)
                         <a href="{{ route('employers.show', $company->slug) }}"
                             class="flex flex-col items-center bg-white border border-blue-600 rounded-lg shadow md:flex-row md:max-w-xl">
@@ -45,7 +46,9 @@
                         </a>
                     @endforeach
                 </div>
-                {{ $companies->links() }}
+                <div class="py-4">
+                    {{ $companies->links() }}
+                </div>
             </div>
         </div>
     </div>

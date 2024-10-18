@@ -12,7 +12,7 @@
                 <div class="form-group">
                     <label class="required" for="title">{{ trans('cruds.advert.fields.title') }}</label>
                     <input class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" type="text" name="title"
-                        id="title" value="{{ old('title', '') }}" required>
+                           id="title" value="{{ old('title', '') }}" required>
                     @if ($errors->has('title'))
                         <div class="invalid-feedback">
                             {{ $errors->first('title') }}
@@ -22,7 +22,8 @@
                 </div>
                 <div class="form-group">
                     <label for="body">{{ trans('cruds.advert.fields.body') }}</label>
-                    <textarea class="form-control ckeditor {{ $errors->has('body') ? 'is-invalid' : '' }}" name="body" id="body">{!! old('body') !!}</textarea>
+                    <textarea class="form-control ckeditor {{ $errors->has('body') ? 'is-invalid' : '' }}" name="body"
+                              id="body">{!! old('body') !!}</textarea>
                     @if ($errors->has('body'))
                         <div class="invalid-feedback">
                             {{ $errors->first('body') }}
@@ -34,7 +35,7 @@
                     <div class="form-group col-md-6">
                         <label class="required" for="category_id">{{ trans('cruds.advert.fields.category') }}</label>
                         <select class="form-control select2 {{ $errors->has('category') ? 'is-invalid' : '' }}"
-                            name="category_id" id="category_id" required>
+                                name="category_id" id="category_id" required>
                             @foreach ($categories as $id => $entry)
                                 <option value="{{ $id }}" {{ old('category_id') == $id ? 'selected' : '' }}>
                                     {{ $entry }}</option>
@@ -50,7 +51,7 @@
                     <div class="form-group col-md-6">
                         <label class="required" for="company_id">{{ trans('cruds.advert.fields.company') }}</label>
                         <select class="form-control select2 {{ $errors->has('company') ? 'is-invalid' : '' }}"
-                            name="company_id" id="company_id" required>
+                                name="company_id" id="company_id" required>
                             @foreach ($companies as $id => $entry)
                                 <option value="{{ $id }}" {{ old('company_id') == $id ? 'selected' : '' }}>
                                     {{ $entry }}</option>
@@ -68,7 +69,7 @@
                     <div class="form-group col-md-6">
                         <label class="required" for="deadline">{{ trans('cruds.advert.fields.deadline') }}</label>
                         <input class="form-control date {{ $errors->has('deadline') ? 'is-invalid' : '' }}" type="text"
-                            name="deadline" id="deadline" value="{{ old('deadline') }}" required>
+                               name="deadline" id="deadline" value="{{ old('deadline') }}" required>
                         @if ($errors->has('deadline'))
                             <div class="invalid-feedback">
                                 {{ $errors->first('deadline') }}
@@ -79,7 +80,7 @@
                     <div class="form-group col-md-6">
                         <label class="required" for="location">{{ trans('cruds.advert.fields.location') }}</label>
                         <input class="form-control {{ $errors->has('location') ? 'is-invalid' : '' }}" type="text"
-                            name="location" id="location" value="{{ old('location', '') }}" required>
+                               name="location" id="location" value="{{ old('location', '') }}" required>
                         @if ($errors->has('location'))
                             <div class="invalid-feedback">
                                 {{ $errors->first('location') }}
@@ -92,12 +93,12 @@
                     <div class="form-group col-md-6">
                         <label>{{ trans('cruds.advert.fields.sector') }}</label>
                         <select class="form-control {{ $errors->has('sector') ? 'is-invalid' : '' }}" name="sector"
-                            id="sector">
+                                id="sector">
                             <option value disabled {{ old('sector', null) === null ? 'selected' : '' }}>
                                 {{ trans('global.pleaseSelect') }}</option>
                             @foreach (App\Models\Advert::SECTOR_SELECT as $key => $label)
                                 <option value="{{ $key }}"
-                                    {{ old('sector', '') === (string) $key ? 'selected' : '' }}>{{ $label }}
+                                        {{ old('sector', '') === (string) $key ? 'selected' : '' }}>{{ $label }}
                                 </option>
                             @endforeach
                         </select>
@@ -111,12 +112,12 @@
                     <div class="form-group col-md-6">
                         <label for="education_level">{{ trans('cruds.advert.fields.education_level') }}</label>
                         <select class="form-control {{ $errors->has('education_level') ? 'is-invalid' : '' }}"
-                            name="education_level" id="education_level">
+                                name="education_level" id="education_level">
                             <option value disabled {{ old('education_level', null) === null ? 'selected' : '' }}>
                                 {{ trans('global.pleaseSelect') }}</option>
-                            @foreach (App\Models\Advert::EDUCACTION_LEVEL as $key => $label)
+                            @foreach (App\Models\Advert::EDUCATION_LEVEL as $key => $label)
                                 <option value="{{ $key }}"
-                                    {{ old('education_level', '') === (string) $key ? 'selected' : '' }}>
+                                        {{ old('education_level', '') === (string) $key ? 'selected' : '' }}>
                                     {{ $label }}
                                 </option>
                             @endforeach
@@ -133,8 +134,8 @@
                     <div class="form-group col-md-6">
                         <label for="desired_experience">{{ trans('cruds.advert.fields.desired_experience') }}</label>
                         <input class="form-control {{ $errors->has('desired_experience') ? 'is-invalid' : '' }}"
-                            type="text" name="desired_experience" id="desired_experience"
-                            value="{{ old('desired_experience', '') }}">
+                               type="text" name="desired_experience" id="desired_experience"
+                               value="{{ old('desired_experience', '') }}">
                         @if ($errors->has('desired_experience'))
                             <div class="invalid-feedback">
                                 {{ $errors->first('desired_experience') }}
@@ -145,12 +146,12 @@
                     <div class="form-group col-md-6">
                         <label>{{ trans('cruds.advert.fields.contract_type') }}</label>
                         <select class="form-control {{ $errors->has('contract_type') ? 'is-invalid' : '' }}"
-                            name="contract_type" id="contract_type">
+                                name="contract_type" id="contract_type">
                             <option value disabled {{ old('contract_type', null) === null ? 'selected' : '' }}>
                                 {{ trans('global.pleaseSelect') }}</option>
                             @foreach (App\Models\Advert::CONTRACT_TYPE_SELECT as $key => $label)
                                 <option value="{{ $key }}"
-                                    {{ old('contract_type', '1') === (string) $key ? 'selected' : '' }}>
+                                        {{ old('contract_type', '1') === (string) $key ? 'selected' : '' }}>
                                     {{ $label }}
                                 </option>
                             @endforeach
@@ -167,8 +168,8 @@
                     <div class="form-group col-md-6">
                         <label for="number_of_positions">{{ trans('cruds.advert.fields.number_of_positions') }}</label>
                         <input class="form-control {{ $errors->has('number_of_positions') ? 'is-invalid' : '' }}"
-                            type="number" name="number_of_positions" id="number_of_positions"
-                            value="{{ old('number_of_positions', '1') }}" step="1">
+                               type="number" name="number_of_positions" id="number_of_positions"
+                               value="{{ old('number_of_positions', '1') }}" step="1">
                         @if ($errors->has('number_of_positions'))
                             <div class="invalid-feedback">
                                 {{ $errors->first('number_of_positions') }}
@@ -179,7 +180,7 @@
                     <div class="form-group col-md-6">
                         <label for="user_id">{{ trans('cruds.advert.fields.user') }}</label>
                         <select class="form-control select2 {{ $errors->has('user') ? 'is-invalid' : '' }}"
-                            name="user_id" id="user_id">
+                                name="user_id" id="user_id">
                             @foreach ($users as $id => $entry)
                                 <option value="{{ $id }}" {{ old('user_id') == $id ? 'selected' : '' }}>
                                     {{ $entry }}</option>
@@ -196,12 +197,12 @@
                 <div class="form-group">
                     <label>{{ trans('cruds.advert.fields.status') }}</label>
                     <select class="form-control {{ $errors->has('status') ? 'is-invalid' : '' }}" name="status"
-                        id="status">
+                            id="status">
                         <option value disabled {{ old('status', null) === null ? 'selected' : '' }}>
                             {{ trans('global.pleaseSelect') }}</option>
                         @foreach (App\Models\Advert::STATUS_SELECT as $key => $label)
                             <option value="{{ $key }}"
-                                {{ old('status', 'draft') === (string) $key ? 'selected' : '' }}>{{ $label }}
+                                    {{ old('status', 'draft') === (string) $key ? 'selected' : '' }}>{{ $label }}
                             </option>
                         @endforeach
                     </select>
@@ -224,14 +225,14 @@
 
 @section('scripts')
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             function SimpleUploadAdapter(editor) {
-                editor.plugins.get('FileRepository').createUploadAdapter = function(loader) {
+                editor.plugins.get('FileRepository').createUploadAdapter = function (loader) {
                     return {
-                        upload: function() {
+                        upload: function () {
                             return loader.file
-                                .then(function(file) {
-                                    return new Promise(function(resolve, reject) {
+                                .then(function (file) {
+                                    return new Promise(function (resolve, reject) {
                                         // Init request
                                         var xhr = new XMLHttpRequest();
                                         xhr.open('POST',
@@ -243,14 +244,14 @@
 
                                         // Init listeners
                                         var genericErrorText =
-                                            `Couldn't upload file: ${ file.name }.`;
-                                        xhr.addEventListener('error', function() {
+                                            `Couldn't upload file: ${file.name}.`;
+                                        xhr.addEventListener('error', function () {
                                             reject(genericErrorText)
                                         });
-                                        xhr.addEventListener('abort', function() {
+                                        xhr.addEventListener('abort', function () {
                                             reject()
                                         });
-                                        xhr.addEventListener('load', function() {
+                                        xhr.addEventListener('load', function () {
                                             var response = xhr.response;
 
                                             if (!response || xhr.status !== 201) {
@@ -271,7 +272,7 @@
                                         });
 
                                         if (xhr.upload) {
-                                            xhr.upload.addEventListener('progress', function(
+                                            xhr.upload.addEventListener('progress', function (
                                                 e) {
                                                 if (e.lengthComputable) {
                                                     loader.uploadTotal = e.total;

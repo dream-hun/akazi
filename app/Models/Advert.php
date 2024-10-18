@@ -7,6 +7,7 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -26,7 +27,7 @@ class Advert extends Model implements HasMedia
         '5' => 'Other',
     ];
 
-    public const EDUCACTION_LEVEL = [
+    public const EDUCATION_LEVEL = [
         '1' => 'Not defined',
         '2' => 'Secondary',
         '3' => 'TVET',
@@ -86,17 +87,17 @@ class Advert extends Model implements HasMedia
         $this->addMediaConversion('preview')->fit('crop', 120, 120);
     }
 
-    public function category()
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class, 'category_id');
     }
 
-    public function company()
+    public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class, 'company_id');
     }
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }
@@ -117,6 +118,7 @@ class Advert extends Model implements HasMedia
     }
     public function formattedDeadline(): string
     {
-        return $this->deadline->diffForHumans();
+        return $this->deadline->format('d-m-Y');
     }
+
 }

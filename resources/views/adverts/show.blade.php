@@ -62,10 +62,10 @@
                                         Location: {{ $advert->location ?? '-' }}
                                     </li>
                                     <li class="px-6 py-4">
-                                        Sector: {{ $advert->sector ?? '-' }}
+                                        Sector: {{ App\Models\Advert::SECTOR_SELECT[$advert->sector] ?? '' }}
                                     </li>
                                     <li class="px-6 py-4">
-                                        Education level: {{ $advert->education_level ?? '-' }}
+                                        Education level:  {{ App\Models\Advert::EDUCATION_LEVEL[$advert->education_level] ?? '' }}
                                     </li>
                                     <li class="px-6 py-4">
                                         Experience: {{ $advert->desired_experience ?? '-' }}
