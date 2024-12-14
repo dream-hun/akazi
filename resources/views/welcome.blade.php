@@ -57,14 +57,14 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="py-6 px-2 w-full max-w-screen-xl mx-auto">
                 <div class="overflow-hidden rounded-md border border-blue-500 bg-blue-500 p-1">
-                    <ul class="flex items-center gap-2 text-sm font-medium">
+                    <ul class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:flex lg:items-center gap-2 text-sm font-medium">
                         @foreach ($categories as $category)
                             <li class="py-1 px-1">
                                 <a href="{{ route('category.show', $category->slug) }}"
-                                    class="inline-flex text-blue-400 bg-gray-100 cursor-pointer items-center gap-2 rounded-lg px-3 py-2 hover:bg-white hover:text-black hover:shadow"
+                                    class="inline-flex w-full text-blue-400 bg-gray-100 cursor-pointer items-center gap-2 rounded-lg px-3 py-2 hover:bg-white hover:text-black hover:shadow"
                                     wire:navigate>
                                     {{ $category->name }} <span
-                                        class="rounded-full bg-green-300 px-2 py-0.5 text-xs font-semibold ">
+                                        class="rounded-full bg-green-300 px-2 py-0.5 text-xs font-semibold">
                                         {{ $category->adverts->count() }}
                                     </span></a>
                             </li>
@@ -73,7 +73,7 @@
                 </div>
                 @foreach ($adverts as $advert)
                     <div class="mt-4 sm:px-4">
-                        <a href="{{ route('adverts.show', $advert->slug) }}" target="__blank"
+                        <a href="{{ route('adverts.show', $advert->slug) }}"
                             class="flex items-center bg-white p-4 rounded-lg shadow-none border border-blue-500">
                             <div class="mr-4">
 
