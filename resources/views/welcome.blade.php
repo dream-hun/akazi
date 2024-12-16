@@ -75,7 +75,7 @@
                     <div class="bg-white p-4 rounded-lg shadow-md border border-blue-500 mt-4">
                         <a href="{{ route('adverts.show',$advert->slug) }}">
                             <div class="flex items-center mb-4">
-                                <img src="{{ $advert->company->getFirstMediaUrl('logo') }}" alt="Company Logo" class="w-10 h-10 rounded-full">
+                                <img src="{{ $advert->company->getFirstMediaUrl('logo') }}" alt="{{ $advert->company->name }}" class="w-10 h-10 rounded-full object-fit-cover">
                                 <div class="ml-3">
                                     <h3 class="text-lg font-semibold">{{ $advert->title ?? '-' }}</h3>
                                     <p class="text-sm text-gray-500">{{ $advert->company->name }} - {{$advert->location ?? '-'}}</p>
@@ -85,7 +85,7 @@
                                 <div class="flex space-x-2">
                                     <span class="px-2 py-1 text-xs font-semibold text-red-500 bg-red-100 rounded">{{$advert->formattedPublish() ?? '-'}}</span>
                                     <span class="px-2 py-1 text-xs font-semibold text-blue-500 bg-blue-100 rounded">{{$advert->formattedDeadline() ?? '-'}}</span>
-                                    <span class="px-2 py-1 text-xs font-semibold text-purple-500 bg-purple-100 rounded">{{$advert->desired_experience ?? 'Not specified'}}</span>
+                                    <span class="px-2 py-1 text-xs font-semibold text-purple-500 bg-purple-100 rounded capitalize">{{$advert->desired_experience ?? 'Not specified'}}</span>
                                 </div>
                             </div>
                         </a>
