@@ -88,14 +88,14 @@
                                 </div>
 
                                 <div class="flex items-center space-x-2">
-                                    <span class="px-2 py-1 text-xs font-semibold text-red-500 bg-red-100 rounded">
-                                        {{$advert->formattedPublish() ?? '-'}}
+                                    <span class="px-2 py-1 text-xs font-normal text-red-500 bg-red-100 rounded">
+                                        {{ $advert->formattedPublish() ?? '-' }}
                                     </span>
-                                    <span class="px-2 py-1 text-xs font-semibold text-blue-500 bg-blue-100 rounded">
-                                        {{$advert->formattedDeadline() ?? '-'}}
+                                    <span class="px-2 py-1 text-xs font-normal text-blue-500 bg-blue-100 rounded">
+                                        {{ $advert->formattedDeadline() ?? '-' }}
                                     </span>
-                                    <span class="px-2 py-1 text-xs font-semibold text-purple-500 bg-purple-100 rounded capitalize">
-                                        {{$advert->desired_experience ?? 'Not specified'}}
+                                    <span class="px-2 py-1 text-xs font-normal text-purple-500 bg-purple-100 rounded capitalize">
+                                        {{ $advert->desired_experience ?? 'Not specified' }}
                                     </span>
                                 </div>
                             </div>
