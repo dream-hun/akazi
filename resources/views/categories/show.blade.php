@@ -51,7 +51,7 @@
 
                                 <img src="{{ $advert->company->getFirstMediaUrl('logo') }}"
                                     alt="{{ $advert->company->name }}"
-                                    class="w-20 h-20 rounded-full object-contain mr-4">
+                                    class="w-20 h-20 rounded-full object-cover mr-4">
 
 
                                 <div class="flex-1">
