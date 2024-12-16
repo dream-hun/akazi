@@ -20,7 +20,7 @@ class Search extends Component
         if ($this->showResults) {
             $this->results = Advert::query()
                 ->select(['id', 'title', 'slug', 'body', 'company_id'])
-                ->with(['company:id,name,logo'])
+                ->with(['company:id,name'])
                 ->where(function ($query) {
                     $query->where('title', 'like', '%' . $this->search . '%')
                           ->orWhere('body', 'like', '%' . $this->search . '%');
