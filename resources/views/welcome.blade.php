@@ -72,34 +72,24 @@
                     </ul>
                 </div>
                 @foreach ($adverts as $advert)
-                    <div class="mt-4 sm:px-4">
-                        <a href="{{ route('adverts.show', $advert->slug) }}"
-                            class="flex items-center bg-white p-4 rounded-lg shadow-none border border-blue-500">
-                            <div class="mr-4">
-
-                                <img src="{{ $advert->company->getFirstMediaUrl('logo') }}"
-                                    alt="{{ $advert->company->name }}" class="w-full h-20 object-cover">
-
+                    <div class="bg-white p-4 rounded-lg shadow-md border border-blue-500 mt-4">
+                        <a href="{{ route('adverts.show',$advert->slug) }}">
+                            <div class="flex items-center mb-4">
+                                <img src="{{ $advert->company->getFirstMediaUrl('logo') }}" alt="Company Logo" class="w-10 h-10 rounded-full">
+                                <div class="ml-3">
+                                    <h3 class="text-lg font-semibold">{{ $advert->title ?? '-' }}</h3>
+                                    <p class="text-sm text-gray-500">{{ $advert->company->name }} - {{$advert->location ?? '-'}}</p>
+                                </div>
                             </div>
-
-                            <div>
-                                <h4 class="py-2 text-md font-semibold tracking-tight text-gray-900 dark:text-white">
-                                    {{ $advert->title ?? '-' }}</h4>
-                                <h5 class="text-blue-700 text-md font-bold tracking-tight py-2">
-                                    {{ $advert->company->name ?? '-' }}
-                                </h5>
-                                <blockquote class="text-md sm:text-sm text-gray-900 hidden md:block">
-                                   Location: {{ $advert->location ?? '-' }}|
-                                    Published on: {{ $advert->formattedPublish() ?? '-' }}| Deadline:
-                                    {{ $advert->formattedDeadline() ?? '-' }}| Experience:
-                                    {{ $advert->desired_experience ?? 'Not specified' }}
-                                </blockquote>
-                                <div class="mt-2 text-gray-600">
-                                    <span
-                                        class="inline-block px-2 py-1 text-xs font-semibold text-white bg-blue-500 rounded">{{ $advert->category->name ?? '-' }}</span>
+                            <div class="flex items-center justify-between">
+                                <div class="flex space-x-2">
+                                    <span class="px-2 py-1 text-xs font-semibold text-red-500 bg-red-100 rounded">{{$advert->formattedPublish() ?? '-'}}</span>
+                                    <span class="px-2 py-1 text-xs font-semibold text-blue-500 bg-blue-100 rounded">{{$advert->formattedDeadline() ?? '-'}}</span>
+                                    <span class="px-2 py-1 text-xs font-semibold text-purple-500 bg-purple-100 rounded">{{$advert->desired_experience ?? 'Not specified'}}</span>
                                 </div>
                             </div>
                         </a>
+
                     </div>
                 @endforeach
             </div>
