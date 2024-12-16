@@ -33,7 +33,7 @@
 
                     <div wire:loading.remove>
                         @if(count($results) > 0)
-                        <ul role="list" class="divide-y divide-gray-100 overflow-hidden bg-white shadow-sm ring-1 ring-blue-600 rounded-xl">
+                        <ul role="list" class="divide-y divide-gray-100 overflow-hidden bg-blue-100 shadow-sm border border-blue-600 ring-blue-600 rounded-xl">
                             @foreach($results as $index => $result)
                             <li class="relative flex justify-between gap-x-6 px-4 py-5 hover:bg-blue-50 {{ $index === $selectedIndex ? 'bg-blue-100' : '' }} transition-colors duration-150">
                                 <div class="flex gap-x-4">
