@@ -16,7 +16,7 @@ class ShowEmployerController extends Controller
             return redirect()->route('landing');
         }
         // Show the company page with the company information
-        $query = $company->adverts();
+        $query = $company->adverts()->orderBy('created_at', 'desc');
         $adverts = $query->paginate(15);
 
         return view('employers.show', ['company' => $company, 'adverts' => $adverts]);
