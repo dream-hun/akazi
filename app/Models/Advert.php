@@ -114,7 +114,7 @@ class Advert extends Model implements HasMedia
 
     public function formattedPublish(): string
     {
-        return $this->created_at->diffForHumans();
+        return $this->created_at->format('d-m-Y');
     }
     public function formattedDeadline(): string
     {
