@@ -45,13 +45,13 @@
                     <div class="mt-4">
                         <a href="{{ route('adverts.show', $advert->slug) }}" class="flex items-start sm:items-center bg-white p-3 sm:p-4 rounded-lg shadow-none border border-blue-500">
                             <div class="flex-shrink-0 mr-3 sm:mr-4">
-                                <img src="{{ $advert->company->getFirstMediaUrl('logo') }}" alt="{{ $advert->company->name }}" class="w-40 h-20 object-fit">
+                                <img src="{{ $advert->company->getFirstMediaUrl('logo') }}" alt="{{ $advert->company->name }}" class="w-20 h-20 rounded-full object-cover">
                             </div>
 
                             <div class="flex-grow min-w-0">
-                                <h4 class="text-lg sm:text-md font-semibold tracking-tight text-gray-900 dark:text-white">
+                                <h4 class="text-lg sm:text-sm font-semibold tracking-tight text-gray-900 dark:text-white">
                                     {{ $advert->title ?? '-' }}</h4>
-                                <h5 class="text-blue-700 text-base sm:text-md font-bold tracking-tight py-1 sm:py-2">
+                                <h5 class="text-blue-700 text-base sm:text-sm font-bold tracking-tight py-1 sm:py-2">
                                     {{ $advert->company->name ?? '-' }}
                                 </h5>
                                 <div class="text-sm sm:text-base text-gray-900 space-y-1 sm:space-y-0">
@@ -72,6 +72,7 @@
                         </a>
                     </div>
                     @endforeach
+
                 </div>
             </div>
         </div>
