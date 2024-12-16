@@ -10,12 +10,10 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="{{ $advert->body }}">
-    <meta name="keywords"
-        content="{{ $advert->category->name ?? '-' }}, {{ $advert->education_level }}, {{ $advert->location }}, {{ $advert->title }},{{ $advert->sector }}">
+    <meta name="keywords" content="{{ $advert->category->name ?? '-' }}, {{ $advert->education_level }}, {{ $advert->location }}, {{ $advert->title }},{{ $advert->sector }}">
 
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=be-vietnam-pro:400,500,600,700" rel="stylesheet" />
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -64,7 +62,7 @@
                                         Sector: {{ App\Models\Advert::SECTOR_SELECT[$advert->sector] ?? '' }}
                                     </li>
                                     <li class="px-6 py-4">
-                                        Education level:  {{ App\Models\Advert::EDUCATION_LEVEL[$advert->education_level] ?? '' }}
+                                        Education level: {{ App\Models\Advert::EDUCATION_LEVEL[$advert->education_level] ?? '' }}
                                     </li>
                                     <li class="px-6 py-4">
                                         Experience: {{ $advert->desired_experience ?? '-' }}
