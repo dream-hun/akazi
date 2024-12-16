@@ -57,7 +57,8 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="py-6 px-2 w-full max-w-screen-xl mx-auto">
                 <div class="overflow-hidden rounded-md border border-blue-500 bg-blue-500 p-1">
-                    <ul class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:flex lg:items-center gap-2 text-sm font-medium">
+                    <ul
+                        class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:flex lg:items-center gap-2 text-sm font-medium">
                         @foreach ($categories as $category)
                             <li class="py-1 px-1">
                                 <a href="{{ route('category.show', $category->slug) }}"
@@ -76,8 +77,7 @@
                         <a href="{{ route('adverts.show', $advert->slug) }}" class="flex items-center">
 
                             <img src="{{ $advert->company->getFirstMediaUrl('logo') }}"
-                                 alt="{{ $advert->company->name }}"
-                                 class="w-20 h-20 rounded-full object-contain mr-4">
+                                alt="{{ $advert->company->name }}" class="w-20 h-20 rounded-full object-contain mr-4">
 
 
                             <div class="flex-1">
@@ -88,24 +88,27 @@
                                 </div>
 
                                 <div class="grid grid-cols-2 lg:grid-cols-4 items-center gap-2">
-    <span class="px-2 py-1 text-xs font-semibold text-green-500 bg-green-50 rounded capitalize">
-        Published at: {{ $advert->formattedPublish() ?? '-' }}
-    </span>
-                                    <span class="px-2 py-1 text-xs font-semibold text-blue-500 bg-blue-50 rounded capitalize">
-        Deadline: {{ $advert->formattedDeadline() ?? '-' }}
-    </span>
-                                    <span class="px-2 py-1 text-xs font-semibold text-yellow-500 bg-yellow-50 rounded capitalize">
-        Location: {{ $advert->location ?? '-' }}
-    </span>
-                                    <span class="px-2 py-1 text-xs font-semibold text-purple-500 bg-purple-50 rounded capitalize">
-        Experience: {{ $advert->desired_experience ?? 'Not specified' }}
-    </span>
+                                    <span
+                                        class="px-2 py-1 text-xs font-semibold text-green-500 bg-green-50 rounded capitalize">
+                                        Published at: {{ $advert->formattedPublish() ?? '-' }}
+                                    </span>
+                                    <span
+                                        class="px-2 py-1 text-xs font-semibold text-blue-500 bg-blue-50 rounded capitalize">
+                                        Deadline: {{ $advert->formattedDeadline() ?? '-' }}
+                                    </span>
+                                    <span
+                                        class="px-2 py-1 text-xs font-semibold text-yellow-500 bg-yellow-50 rounded capitalize">
+                                        Location: {{ $advert->location ?? '-' }}
+                                    </span>
+                                    <span
+                                        class="px-2 py-1 text-xs font-semibold text-purple-500 bg-purple-50 rounded capitalize">
+                                        Experience: {{ $advert->desired_experience ?? 'Not specified' }}
+                                    </span>
                                 </div>
 
                             </div>
                         </a>
                     </div>
-
                 @endforeach
             </div>
         </div>
