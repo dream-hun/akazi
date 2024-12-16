@@ -75,7 +75,7 @@
                     <div class="bg-white p-4 rounded-lg shadow-md border border-blue-500 mt-4">
                         <a href="{{ route('adverts.show',$advert->slug) }}">
                             <div class="flex items-center mb-4">
-                                <img src="{{ $advert->company->getFirstMediaUrl('logo') }}" alt="{{ $advert->company->name }}" class="w-10 h-10 rounded-full object-fit-cover">
+                                <img src="{{ $advert->company->getFirstMediaUrl('logo') }}" alt="{{ $advert->company->name }}" class="w-20 h-20 rounded-full object-cover">
                                 <div class="ml-3">
                                     <h3 class="text-lg font-semibold">{{ $advert->title ?? '-' }}</h3>
                                     <p class="text-sm text-gray-500">{{ $advert->company->name }} - {{$advert->location ?? '-'}}</p>
