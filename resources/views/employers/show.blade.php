@@ -29,9 +29,9 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 @foreach ($adverts as $advert)
                 <div class="mt-4">
-                    <a href="{{ route('adverts.show', $advert->slug) }}"  class="flex items-start sm:items-center bg-white p-3 sm:p-4 rounded-lg shadow-none border border-blue-500">
+                    <a href="{{ route('adverts.show', $advert->slug) }}" class="flex items-start sm:items-center bg-white p-3 sm:p-4 rounded-lg shadow-none border border-blue-500">
                         <div class="flex-shrink-0 mr-3 sm:mr-4">
-                            <img src="{{ $advert->company->getFirstMediaUrl('logo') }}" alt="{{ $advert->company->name }}" class="w-20 h-20 object-cover">
+                            <img src="{{ $advert->company->getFirstMediaUrl('logo') }}" alt="{{ $advert->company->name }}" class="w-40 h-20 object-fit">
                         </div>
 
                         <div class="flex-grow min-w-0">
